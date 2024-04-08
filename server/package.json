@@ -1,0 +1,21 @@
+{
+  "name": "blog-website",
+  "description": "blog website data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "json-server": "^0.17.1",
+    "json-server-auth": "^2.1.0"
+  },
+  "keywords": [
+    "Learning",
+    "Portal",
+    "JSON"
+  ],
+  "author": "Sakil Ahmed",
+  "license": "ISC"
+}

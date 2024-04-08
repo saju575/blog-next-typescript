@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "email": "sakil@gmail.com",
+      "password": "$2a$10$/TDPCTU28mFzKnSsW2pHSu512mpMKxLf8eiPbcTFLSNL87tbZBp3W",
+      "role": "admin",
+      "name": "Sakil Admin",
+      "id": 1
+    },
+
+    {
+      "email": "saju@gmail.com",
+      "password": "$2a$10$hiU1nq4FAY/31l/8G4EdJe5O4AmqFtyzubZCxY6V7Lz4UBxbfIZiS",
+      "name": "Sakil Ahmed",
+      "role": "user",
+      "id": 2
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "slug": "Coding",
+      "title": "Coding",
+      "img": "/img/coding.png"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "user_email": "saju@gmail.com",
+      "category_id": 1,
+      "cat_slug": "Coding",
+      "img": "something.com",
+      "title": "lorem..",
+      "desc": "lorem something new",
+      "createdAt": "04-04-2024"
+    }
+  ]
+}

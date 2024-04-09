@@ -7,7 +7,6 @@
       "name": "Sakil Admin",
       "id": 1
     },
-
     {
       "email": "saju@gmail.com",
       "password": "$2a$10$hiU1nq4FAY/31l/8G4EdJe5O4AmqFtyzubZCxY6V7Lz4UBxbfIZiS",
@@ -31,10 +30,23 @@
       "user_email": "saju@gmail.com",
       "category_id": 1,
       "cat_slug": "Coding",
-      "img": "something.com",
+      "img": "/img/travel.png",
       "title": "lorem..",
+      "user_name": "Sakil Ahmed",
       "desc": "lorem something new",
-      "createdAt": "04-04-2024"
+      "createdAt": 1712640920130
+    },
+    {
+      "user_id": 2,
+      "user_email": "saju@gmail.com",
+      "category_id": 1,
+      "cat_slug": "Coding",
+      "img": "/img/travel.png",
+      "title": "lorem ipsum new..",
+      "user_name": "Sakil Ahmed",
+      "desc": "lorem something new to happend",
+      "createdAt": 1712640921130,
+      "id": 2
     }
   ]
 }

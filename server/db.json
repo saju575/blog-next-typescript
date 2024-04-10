@@ -13,6 +13,14 @@
       "name": "Sakil Ahmed",
       "role": "user",
       "id": 2
+    },
+    {
+      "email": "rakib@gmail.com",
+      "password": "$2a$10$.ddTXNOLsZjOfR3TL/jxtOhW/l.o/L.L5D1rvRs9VAWWX8C4XaPvC",
+      "name": "Rakib Hassan",
+      "role": "user",
+      "createdAt": 1712689614383,
+      "id": 3
     }
   ],
   "category": [
@@ -41,10 +49,10 @@
       "user_email": "saju@gmail.com",
       "category_id": 1,
       "cat_slug": "Coding",
-      "img": "/img/travel.png",
-      "title": "lorem ipsum new..",
+      "img": "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+      "title": "Lizards and their life",
       "user_name": "Sakil Ahmed",
-      "desc": "lorem something new to happend",
+      "desc": "Lizards are fascinating creatures that belong to the reptile family. They are characterized by their scaly skin, elongated bodies, and usually, four legs. However, some species, like snakes, have lost their limbs over time. Lizards are found in various habitats worldwide, from deserts to rainforests, and they come in a wide array of sizes, colors, and shapes.<br/><br/>One of the most remarkable features of lizards is their ability to regenerate lost body parts, such as their tails. When threatened, many species will detach their tails as a defense mechanism, allowing them to escape while the predator is left with only the wriggling tail. Over time, the lizard will regenerate a new tail<br/><br/>Lizards are ectothermic, meaning they rely on external sources of heat to regulate their body temperature. They are most active during the day when temperatures are warmest, and they often bask in the sun to raise their body temperature. However, some species are nocturnal and are active at night.<br/><br/>These reptiles are incredibly diverse in their diets, with some being herbivores, feeding mainly on plants, while others are carnivores, preying on insects, small mammals, or even other lizards. Their method of hunting varies greatly among species, with some relying on stealth and camouflage, while others use speed and agility to catch their prey.<br/>Lizards play important roles in ecosystems as both predators and prey. They help control insect populations and are an essential food source for many larger predators. Additionally, some species, such as the green anole, serve as indicators of ecosystem health due to their sensitivity to environmental changes.</br>Overall, lizards are a diverse and intriguing group of reptiles that have adapted to a wide range of habitats and lifestyles, making them a fascinating subject of study for scientists and nature enthusiasts alike.",
       "createdAt": 1712640921130,
       "id": 2
     }

@@ -1,0 +1,9 @@
+.logo {
+  font-weight: bold;
+  text-transform: capitalize;
+  background: linear-gradient(to right, #56e0dd 0%, #888 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Pacifico", cursive;
+}

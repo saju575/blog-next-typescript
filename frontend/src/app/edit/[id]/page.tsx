@@ -191,7 +191,6 @@ const EditPost = ({ params }: { params: { id: string } }) => {
           <div>
             <ReactQuill
               theme="snow"
-              onBlur={formik.handleBlur}
               className="text-light placeholder:text-light"
               value={formik.values.desc}
               onChange={(e: string) => formik.setFieldValue("desc", e)}

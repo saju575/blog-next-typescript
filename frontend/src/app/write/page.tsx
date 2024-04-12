@@ -165,7 +165,6 @@ const WritePage = () => {
             <ReactQuill
               theme="snow"
               className="text-light placeholder:text-light"
-              onBlur={formik.handleBlur}
               value={formik.values.desc}
               onChange={(e: string) => formik.setFieldValue("desc", e)}
               placeholder="Tell your story..."

@@ -1,7 +1,9 @@
 "use client";
 
 import { AuthContext } from "@/providers/auth-provider";
+import { deleteCookie } from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const AuthLinks = () => {
@@ -10,9 +12,13 @@ const AuthLinks = () => {
 
   const [open, setOpen] = useState(false);
 
+  const router = useRouter();
+
   function logOut() {
     localStorage.removeItem("blog_token");
+    deleteCookie("blog_login");
     dispatch({ type: "LOGOUT" });
+    router.push("/");
   }
 
   return (

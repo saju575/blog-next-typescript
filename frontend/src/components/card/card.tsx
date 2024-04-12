@@ -30,7 +30,9 @@ const Card = ({ item }: { item: Post }) => {
         <div
           className="mt-5 mb-4 text-softdark dark:text-gray text-base font-light"
           dangerouslySetInnerHTML={{
-            __html: item?.desc ? `${item.desc.substring(0, 60)}...` : "",
+            __html: item?.desc
+              ? `${item.desc.split(" ").slice(0, 20).join(" ")}...`
+              : "",
           }}
         />
 

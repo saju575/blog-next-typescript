@@ -1,4 +1,5 @@
 "use client";
+import { deleteCookie, setCookie } from "cookies-next";
 import { createContext, useEffect, useReducer } from "react";
 import axios from "../../axios-request/axios-request";
 
@@ -90,12 +91,15 @@ const AuthContextProvider = ({
       if (storedToken) {
         const userProfileData: User | null = await fetchUserProfile();
 
-        if (userProfileData) {
+        if (userProfileData?.id) {
+          setCookie("blog_login", "login");
           dispatch({ type: "LOGIN_SUCCESS", payload: userProfileData });
         } else {
+          deleteCookie("blog_login");
           dispatch({ type: "LOGOUT" });
         }
       } else {
+        deleteCookie("blog_login");
         dispatch({ type: "LOGOUT" });
       }
     }

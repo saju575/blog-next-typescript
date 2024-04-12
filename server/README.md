@@ -1,14 +1,9 @@
-# Online Learning Portal JSON server
+# Blog next mock server
 
-### Root link https://online-learning-portal-json-api.onrender.com/
+## Root link https://blog-next-swwi.onrender.com/
 
-It is desigined to used for Online Learning Portal Website
+It is desigined to used for a simple Blog Website
 
-### Functionality
-
-- Use to work on login and register
-- It have "videos", "assignments", "quiz", "assignmentMark", "quizMark" fields.
-
-### Technologies Used
+## Technologies Used
 
 JSON server | JSON server auth |

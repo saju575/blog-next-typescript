@@ -1,5 +1,6 @@
 "use client";
 import { AuthContext } from "@/providers/auth-provider";
+import { setCookie } from "cookies-next";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
@@ -43,6 +44,7 @@ const LoginForm = () => {
           if (loginData.accessToken) {
             localStorage.setItem("blog_token", loginData.accessToken);
           }
+          setCookie("blog_login", "login");
           dispatch({ type: "LOGIN_SUCCESS", payload: loginData.user });
           setLoginLoading(() => false);
           router.push("/");

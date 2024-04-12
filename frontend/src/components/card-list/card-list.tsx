@@ -8,14 +8,6 @@ const getData = async (
   cat: string | "",
   limit: number
 ): Promise<Post[]> => {
-  // const res = axios.get(
-  //   `/posts?_page=${page}&_cat_slug=${cat}&_limit=${limit}`
-  // );
-
-  // if ((await res).statusText !== "OK") {
-  //   throw new Error("Failed to fetch categories");
-  // }
-  // return (await res).data;
   const res = await fetch(
     `${BASE_BACKEND_URL}/posts?_page=${page}&_cat_slug=${cat}&_limit=${limit}`,
     { cache: "no-store" }

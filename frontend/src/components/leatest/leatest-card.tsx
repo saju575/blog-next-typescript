@@ -15,7 +15,7 @@ const LeatestCard = ({ post }: { post: Post }) => {
           title={post.title}
           className="font-medium text-softdark dark:text-softlight"
         >
-          {post.title.slice(0, 20) + "..."}
+          {post.title.split(" ").slice(0, 10).join(" ") + "..."}
         </h3>
         <div className="text-sm">
           <span className="text-dark dark:text-light">{post.user_name}</span>

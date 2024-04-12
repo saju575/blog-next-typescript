@@ -22,7 +22,7 @@ const Leatest = async () => {
         </h3>
 
         <div className="mt-4 mb-10 flex flex-col gap-8">
-          {posts.map((post, index) => (
+          {posts?.map((post, index) => (
             <LeatestCard key={index} post={post} />
           ))}
         </div>

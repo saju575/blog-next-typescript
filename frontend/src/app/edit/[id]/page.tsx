@@ -65,7 +65,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
       title: previousPostData?.title!,
       img: previousPostData?.img!,
       desc: previousPostData?.desc!,
-      category_id: Number(previousPostData?.id.toString()!),
+      category_id: Number(previousPostData?.category_id.toString()!),
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -83,7 +83,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
         };
 
         const result = await updatePost(id, newData);
-        console.log(result);
+
         if (result.id) {
           route.push(`/posts/${result.id}`);
         }
@@ -141,7 +141,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
             />
             <div className="h-4 my-2">
               {formik.errors.title && formik.touched.title && (
-                <div>{formik.errors.title}</div>
+                <div className="text-red">{formik.errors.title}</div>
               )}
             </div>
           </div>
@@ -158,7 +158,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
             />
             <div className="h-4 my-2">
               {formik.errors.img && formik.touched.img && (
-                <div>{formik.errors.img}</div>
+                <div className="text-red">{formik.errors.img}</div>
               )}
             </div>
           </div>
@@ -180,16 +180,29 @@ const EditPost = ({ params }: { params: { id: string } }) => {
                 </option>
               ))}
             </select>
+
+            <div className="h-4 my-2">
+              {formik.errors.category_id && formik.touched.category_id && (
+                <div className="text-red">{formik.errors.category_id}</div>
+              )}
+            </div>
           </div>
 
           <div>
             <ReactQuill
               theme="snow"
+              onBlur={formik.handleBlur}
               className="text-light placeholder:text-light"
               value={formik.values.desc}
               onChange={(e: string) => formik.setFieldValue("desc", e)}
               placeholder="Tell your story..."
             />
+
+            <div className="h-4 my-2">
+              {formik.errors.desc && formik.touched.desc && (
+                <div className="text-red">{formik.errors.desc}</div>
+              )}
+            </div>
           </div>
         </div>
       </form>

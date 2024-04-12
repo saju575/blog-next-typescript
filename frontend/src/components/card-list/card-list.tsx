@@ -5,13 +5,16 @@ import Pagination from "../pagination/pagination";
 
 const getData = async (
   page: number | string,
-  cat: string | "",
+  cat: string,
   limit: number
 ): Promise<Post[]> => {
-  const res = await fetch(
-    `${BASE_BACKEND_URL}/posts?_page=${page}&_cat_slug=${cat}&_limit=${limit}`,
-    { cache: "no-store" }
-  );
+  let url: string;
+  if (cat) {
+    url = `${BASE_BACKEND_URL}/posts?cat_slug=${cat}&_page=${page}&_limit=${limit}`;
+  } else {
+    url = `${BASE_BACKEND_URL}/posts?_page=${page}&_limit=${limit}`;
+  }
+  const res = await fetch(url, { cache: "no-store" });
 
   if (res.status !== 200) {
     throw new Error("Failed to fetch categories");

@@ -53,20 +53,34 @@ const AuthLinks = () => {
           className="z-10 duration-300 absolute left-0 top-10 w-full  bg-white dark:bg-dark flex flex-col items-center justify-center gap-3"
           style={{ height: "calc(100% - 2.5rem)" }}
         >
-          <Link href={"/"} className="text-xl">
+          <Link href={"/"} className="text-xl" onClick={() => setOpen(false)}>
             Homepage
           </Link>
 
           {!state.user?.email ? (
-            <Link href={"/login"} className="text-xl">
+            <Link
+              href={"/login"}
+              className="text-xl"
+              onClick={() => setOpen(false)}
+            >
               Login
             </Link>
           ) : (
             <>
-              <Link href="/write" className="text-xl">
+              <Link
+                href="/write"
+                className="text-xl"
+                onClick={() => setOpen(false)}
+              >
                 Write
               </Link>
-              <span className="cursor-pointer text-xl" onClick={() => logOut()}>
+              <span
+                className="cursor-pointer text-xl"
+                onClick={() => {
+                  setOpen(false);
+                  logOut();
+                }}
+              >
                 Logout
               </span>
             </>

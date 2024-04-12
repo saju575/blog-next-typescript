@@ -3,7 +3,7 @@ import CategoryList from "@/components/category-list/category-list";
 import Featured from "@/components/featured/featured";
 import Leatest from "@/components/leatest/leatest";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 // export const revalidate = 0;
 export default function Home({
   searchParams,

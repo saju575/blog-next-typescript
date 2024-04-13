@@ -20,6 +20,11 @@ const Singlepage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
   const post: Post | null = await getData(parseInt(slug));
+
+  if (!post) {
+    return <div className="text-red">There is somthing wrong!</div>;
+  }
+
   return (
     <div className="pt-6">
       <div className="flex items-center gap-11">

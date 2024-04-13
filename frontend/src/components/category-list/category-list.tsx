@@ -22,7 +22,7 @@ const CategoryList = async () => {
         <h2 className="mb-10 capitalize text-2xl text-dark dark:text-light font-bold">
           Popular categories
         </h2>
-        <p className="text-red-500">Failed to fetch category list</p>
+        <p className="text-red">Failed to fetch category list</p>
       </div>
     );
   }
@@ -35,7 +35,7 @@ const CategoryList = async () => {
         <h2 className="mb-10 capitalize text-2xl text-dark dark:text-light font-bold">
           Popular categories
         </h2>
-        <p className="text-red-500">Category list is empty</p>
+        <p className="text-red">Category list is empty</p>
       </div>
     );
   }

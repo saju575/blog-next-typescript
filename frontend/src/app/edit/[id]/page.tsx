@@ -56,7 +56,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const [category, setCategory] = useState<CategoryI[]>([]);
   const [previousPostData, setPreviousPostData] = useState<Post>();
-
+  const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(AuthContext);
   const route = useRouter();
 
@@ -69,8 +69,9 @@ const EditPost = ({ params }: { params: { id: string } }) => {
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
-    onSubmit: async (values, actions) => {
+    onSubmit: async (values) => {
       try {
+        setIsLoading(() => true);
         const selectedCategory = category.find(
           (v) => v.id == values.category_id
         );
@@ -85,11 +86,12 @@ const EditPost = ({ params }: { params: { id: string } }) => {
         const result = await updatePost(id, newData);
 
         if (result.id) {
+          setIsLoading(() => false);
           route.push(`/posts/${result.id}`);
         }
-      } catch (error) {}
-
-      actions.setSubmitting(false);
+      } catch (error) {
+        setIsLoading(() => false);
+      }
     },
   });
 
@@ -125,7 +127,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
             type="submit"
             className="text-white max-w-max px-2 bg-blue-500 rounded-sm"
           >
-            Update Post
+            {isLoading ? "Updating Post.." : "Update Post"}
           </button>
         </div>
         <div className="flex flex-col gap-3">

@@ -14,10 +14,15 @@ const Footer = () => {
           Mordern blog
         </div>
         <p className="font-light dark:text-gray">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo,
-          blanditiis illo accusamus fuga qui consectetur, ipsum obcaecati
-          similique eum culpa nulla molestias! Deleniti placeat unde, vero
-          architecto fuga mollitia pariatur!
+          Welcome to Modern Blog, your destination for contemporary insights and
+          inspiration. Dive into a world where modernity meets creativity, where
+          fresh perspectives and innovative ideas flourish. Join our vibrant
+          community of thinkers and writers as we explore the latest trends,
+          share thought-provoking discussions, and uncover the essence of modern
+          living. Stay updated with curated articles, embrace the modern
+          lifestyle, and embark on a journey towards a more informed and
+          inspired mindset. Experience the power of modern ideas with Modern
+          Blog – your gateway to a world of limitless possibilities.
         </p>
         <div className="mt-3 flex  gap-1">
           <Image
@@ -48,22 +53,22 @@ const Footer = () => {
         <div className="flex flex-col gap-3">
           <span className="font-bold">Links</span>
           <Link href={"/"}>Homepage</Link>
-          <Link href={"/"}>Blog</Link>
+          {/* <Link href={"/"}>Blog</Link>
           <Link href={"/"}>About</Link>
-          <Link href={"/"}>Contact</Link>
+          <Link href={"/"}>Contact</Link> */}
         </div>
         <div className="flex flex-col gap-3">
           <span className="font-bold">Tags</span>
-          <Link href={"/"}>Style</Link>
-          <Link href={"/"}>Fashion</Link>
-          <Link href={"/"}>Codding</Link>
-          <Link href={"/"}>Food</Link>
+          <Link href={"/blog?cat=Style"}>Style</Link>
+          <Link href={"/blog?cat=Fashion"}>Fashion</Link>
+          <Link href={"/blog?cat=LifeStyle"}>LifeStyle</Link>
+          <Link href={"/blog?cat=Food"}>Food</Link>
         </div>
         <div className="flex flex-col gap-3">
           <span className="font-bold">Socials</span>
           <Link href={"/"}>Facebook</Link>
-          <Link href={"/"}>instragram</Link>
-          <Link href={"/"}>youtube</Link>
+          <Link href={"/"}>Instragram</Link>
+          <Link href={"/"}>Youtube</Link>
         </div>
       </div>
     </footer>

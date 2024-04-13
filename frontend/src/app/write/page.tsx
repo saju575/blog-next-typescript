@@ -41,7 +41,7 @@ const validationSchema = Yup.object().shape({
 
 const WritePage = () => {
   const [category, setCategory] = useState<CategoryI[]>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(AuthContext);
   const route = useRouter();
 
@@ -54,8 +54,9 @@ const WritePage = () => {
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
-    onSubmit: async (values, actions) => {
+    onSubmit: async (values) => {
       try {
+        setIsLoading(() => true);
         const selectedCategory = category.find(
           (v) => v.id == values.category_id
         );
@@ -70,11 +71,12 @@ const WritePage = () => {
         const result = await submitPost(newData);
 
         if (result.id) {
+          setIsLoading(() => false);
           route.push(`/posts/${result.id}`);
         }
-      } catch (error) {}
-
-      actions.setSubmitting(false);
+      } catch (error) {
+        setIsLoading(() => false);
+      }
     },
   });
 
@@ -98,7 +100,7 @@ const WritePage = () => {
             type="submit"
             className="text-white max-w-max px-2 bg-blue-500 rounded-sm"
           >
-            Publish
+            {isLoading ? "Publishing.." : "Publish"}
           </button>
         </div>
         <div className="flex flex-col gap-3">

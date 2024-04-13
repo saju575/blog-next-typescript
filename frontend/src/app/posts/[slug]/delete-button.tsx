@@ -19,7 +19,7 @@ const DeleteButton = ({
 
   const handleDeletePost = (id: string): void => {
     try {
-      const res = axios.delete(`/posts/${id}`);
+      axios.delete(`/posts/${id}`);
       route.push("/");
     } catch (error) {}
   };

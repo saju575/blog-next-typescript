@@ -21,7 +21,7 @@ const Leatest = async () => {
           {"Most Leatest"}
         </h3>
 
-        <p className="text-red-500">Something went wrong!</p>
+        <p className="text-red">Something went wrong!</p>
       </>
     </div>;
   }
@@ -34,7 +34,7 @@ const Leatest = async () => {
           {"Most Leatest"}
         </h3>
 
-        <p className="text-red-500">No posts found!</p>
+        <p className="text-red">No posts found!</p>
       </>
     </div>;
   }

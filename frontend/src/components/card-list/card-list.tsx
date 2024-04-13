@@ -7,7 +7,7 @@ const getData = async (
   page: number | string,
   cat: string,
   limit: number
-): Promise<Post[]> => {
+): Promise<Post[] | null> => {
   let url: string;
   if (cat) {
     url = `${BASE_BACKEND_URL}/posts?cat_slug=${cat}&_page=${page}&_limit=${limit}`;
@@ -16,8 +16,8 @@ const getData = async (
   }
   const res = await fetch(url, { cache: "no-store" });
 
-  if (res.status !== 200) {
-    throw new Error("Failed to fetch categories");
+  if (!res.ok) {
+    return null;
   }
   return await res.json();
 };
@@ -25,19 +25,43 @@ const getData = async (
 const getDataLength = async (): Promise<number> => {
   const res = axios.get("/posts");
   if ((await res).statusText !== "OK") {
-    throw new Error("Failed to fetch categories");
+    return 0;
   }
   return (await res).data.length > 0 ? (await res).data.length : 0;
 };
 
 const CardList = async ({ page, cat }: { page?: number; cat?: string }) => {
   const POST_PER_PAGE = 5;
-  const posts: Array<Post> = await getData(page!, cat!, POST_PER_PAGE);
+  const posts: Array<Post> | null = await getData(page!, cat!, POST_PER_PAGE);
   const getPostLength: number = await getDataLength();
 
   const hasPrev = POST_PER_PAGE * (page! - 1) > 0;
 
   const hasNext = POST_PER_PAGE * (page! - 1) + POST_PER_PAGE < getPostLength;
+
+  if (!posts) {
+    return (
+      <div className={`flex-[5]`}>
+        <h2 className="mb-10 capitalize text-2xl text-dark dark:text-light font-bold">
+          All Posts
+        </h2>
+
+        <p className="text-red-500">Something went wrong!</p>
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className={`flex-[5]`}>
+        <h2 className="mb-10 capitalize text-2xl text-dark dark:text-light font-bold">
+          All Posts
+        </h2>
+
+        <p className="text-red-500">No posts found!</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`flex-[5]`}>

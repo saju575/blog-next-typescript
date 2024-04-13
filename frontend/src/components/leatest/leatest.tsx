@@ -1,17 +1,43 @@
 import axios from "../../../axios-request/axios-request";
 import LeatestCard from "./leatest-card";
 
-const getData = async (limit: number): Promise<Post[]> => {
+const getData = async (limit: number): Promise<Post[] | null> => {
   const res = axios.get(`/posts?_sort=createdAt&_order=desc& _limit=${limit}`);
 
   if ((await res).statusText !== "OK") {
-    throw new Error("Failed to fetch categories");
+    return null;
   }
   return (await res).data;
 };
 
 const Leatest = async () => {
-  const posts: Post[] = await getData(7);
+  const posts: Post[] | null = await getData(7);
+
+  if (!posts) {
+    <div className="flex-[2] hidden lg:block">
+      <>
+        <h3 className="text-gray text-sm">{"What's hot"}</h3>
+        <h3 className="capitalize text-2xl text-dark dark:text-light font-bold">
+          {"Most Leatest"}
+        </h3>
+
+        <p className="text-red-500">Something went wrong!</p>
+      </>
+    </div>;
+  }
+
+  if (posts?.length === 0) {
+    <div className="flex-[2] hidden lg:block">
+      <>
+        <h3 className="text-gray text-sm">{"What's hot"}</h3>
+        <h3 className="capitalize text-2xl text-dark dark:text-light font-bold">
+          {"Most Leatest"}
+        </h3>
+
+        <p className="text-red-500">No posts found!</p>
+      </>
+    </div>;
+  }
 
   return (
     <div className="flex-[2] hidden lg:block">

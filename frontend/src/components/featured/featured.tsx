@@ -2,19 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { BASE_BACKEND_URL } from "../../../global-const";
 
-const fetchFirstPost = async (): Promise<Post[]> => {
+const fetchFirstPost = async (): Promise<Post[] | null> => {
   const res = await fetch(`${BASE_BACKEND_URL}/posts?_limit=1`, {
     cache: "no-store",
   });
 
-  // if (!res.ok) {
-  //   return null;
-  // }
+  if (!res.ok) {
+    return null;
+  }
   return await res.json();
 };
 
 const Featured = async () => {
-  const post: Array<Post> = await fetchFirstPost();
+  const post: Array<Post> | null = await fetchFirstPost();
 
   if (!post || post.length === 0) {
     return (

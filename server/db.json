@@ -63,11 +63,11 @@
   ],
   "posts": [
     {
-      "title": "Lorem ipsum dolor",
+      "title": "Exploring I-Land: Unveiling the Unknown?",
       "img": "/img/p1.jpeg",
-      "desc": "<p>Explicabo, blanditiis illo accusamus fuga qui consectetur, ipsum obcaecati similique eum culpa nulla molestias! Deleniti placeat unde, vero architecto fuga mollitia pariatur!</p>",
-      "category_id": 1,
-      "cat_slug": "Coding",
+      "desc": "<p>'I-Land' could refer to several things depending on the context. One possibility is the South Korean survival reality show called 'I-Land.' It was produced by CJ ENM and Big Hit Entertainment and aired on Mnet in 2020. The show follows a group of trainees as they compete for a spot in a new K-pop group.</br></br>Another possibility is that 'I-Land' refers to a fictional location, perhaps in a story or game. If you have a specific 'I-Land' in mind, could you provide more details so I can tailor the information accordingly?</p>",
+      "category_id": 4,
+      "cat_slug": "Travel",
       "user_id": 2,
       "user_email": "saju@gmail.com",
       "user_name": "Sakil Ahmed",
@@ -77,7 +77,7 @@
       "user_id": 2,
       "user_email": "saju@gmail.com",
       "category_id": 1,
-      "cat_slug": "Coding",
+      "cat_slug": "LifeStyle",
       "img": "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
       "title": "Lizards and their life",
       "user_name": "Sakil Ahmed",
@@ -98,9 +98,9 @@
       "id": 6
     },
     {
-      "title": "About Bird",
+      "title": "The Dodo Bird",
       "img": "https://t4.ftcdn.net/jpg/01/77/47/67/360_F_177476718_VWfYMWCzK32bfPI308wZljGHvAUYSJcn.jpg",
-      "desc": "<p>Nothing</p>",
+      "desc": "This is dodo",
       "category_id": 6,
       "cat_slug": "Culture",
       "user_id": 3,

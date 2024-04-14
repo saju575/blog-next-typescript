@@ -71,6 +71,8 @@ const WritePage = () => {
         const result = await submitPost(newData);
 
         if (result.id) {
+          console.log(result);
+
           route.push(`/posts/${result.id}`);
           setIsLoading(() => false);
         }

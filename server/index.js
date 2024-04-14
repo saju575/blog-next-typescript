@@ -11,10 +11,7 @@ const middlewares = jsonServer.defaults();
 server.db = router.db;
 // Add custom middleware for CORS
 server.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    req.headers["origin"] || req.get("Origin")
-  ); // Allow any origin
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Allow any origin
   res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"

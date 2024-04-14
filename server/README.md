@@ -1,6 +1,6 @@
 # Blog next mock server
 
-## Root link https://blog-next-swwi.onrender.com/
+## Root link https://scary-calf-jodhpurs.cyclic.app/
 
 It is desigined to used for a simple Blog Website
 

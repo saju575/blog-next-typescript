@@ -86,8 +86,8 @@ const EditPost = ({ params }: { params: { id: string } }) => {
         const result = await updatePost(id, newData);
 
         if (result.id) {
-          setIsLoading(() => false);
           route.push(`/posts/${result.id}`);
+          setIsLoading(() => false);
         }
       } catch (error) {
         setIsLoading(() => false);

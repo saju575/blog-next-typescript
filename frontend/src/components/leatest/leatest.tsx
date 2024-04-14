@@ -2,7 +2,9 @@ import axios from "../../../axios-request/axios-request";
 import LeatestCard from "./leatest-card";
 
 const getData = async (limit: number): Promise<Post[] | null> => {
-  const res = axios.get(`/posts?_sort=createdAt&_order=desc& _limit=${limit}`);
+  const res = await axios.get(
+    `/posts?_sort=createdAt&_order=desc& _limit=${limit}`
+  );
 
   if ((await res).statusText !== "OK") {
     return null;

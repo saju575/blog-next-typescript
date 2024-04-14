@@ -23,7 +23,7 @@ const getData = async (
 };
 
 const getDataLength = async (): Promise<number> => {
-  const res = axios.get("/posts");
+  const res = await axios.get("/posts");
   if ((await res).statusText !== "OK") {
     return 0;
   }

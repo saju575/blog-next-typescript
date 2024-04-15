@@ -11,11 +11,13 @@ const submitLoginData = async (values: {
   email: string;
   password: string;
 }): Promise<LoginDataI | null> => {
-  const res = await axios.post("/login", values);
-  if (res.status !== 200) {
+  try {
+    const res = await axios.post("/login", values);
+
+    return res.data;
+  } catch (error) {
     return null;
   }
-  return res.data;
 };
 
 const LoginForm = () => {

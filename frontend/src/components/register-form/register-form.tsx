@@ -13,11 +13,12 @@ const submitRegisterData = async (values: {
   name: string;
   role: string;
 }): Promise<LoginDataI | null> => {
-  const res = await axios.post("/register", values);
-  if (res.status !== 201) {
+  try {
+    const res = await axios.post("/register", values);
+    return res.data;
+  } catch (error) {
     return null;
   }
-  return res.data;
 };
 
 const RegisterForm = () => {

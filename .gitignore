@@ -3,3 +3,4 @@
 /frontend/.next
 /backend/node_modules
 /backend/dist
+/server

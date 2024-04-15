@@ -7,7 +7,6 @@ const blogPage = ({
   searchParams: { page?: string; cat?: string };
 }) => {
   const { page, cat } = searchParams;
-  const pageNumber = parseInt(page!) || 1;
 
   return (
     <div>
@@ -15,7 +14,7 @@ const blogPage = ({
         {cat} Blog
       </h2>
       <div className="flex gap-12">
-        <CardList page={pageNumber} cat={cat} />
+        <CardList page={page ? page : "1"} cat={cat} />
         <Leatest />
       </div>
     </div>

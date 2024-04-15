@@ -10,7 +10,6 @@ const fetchFirstPost = async (): Promise<PostI | null> => {
   if (!res.ok) {
     return null;
   }
-  // console.log(await res.json());
 
   return await res.json();
 };

@@ -21,23 +21,15 @@ const getData = async (
   return await res.json();
 };
 
-// const getDataLength = async (): Promise<number> => {
-//   const res = await axios.get("/posts");
-//   if ((await res).statusText !== "OK") {
-//     return 0;
-//   }
-//   return (await res).data.length > 0 ? (await res).data.length : 0;
-// };
-
-const CardList = async ({ page, cat }: { page?: number; cat?: string }) => {
+const CardList = async ({ page, cat }: { page?: string; cat?: string }) => {
   const POST_PER_PAGE = 5;
   const posts: PostI | null = await getData(page!, cat!, POST_PER_PAGE);
-  // const getPostLength: number = await getDataLength();
 
-  const hasPrev = POST_PER_PAGE * (page! - 1) > 0;
+  const hasPrev = POST_PER_PAGE * (Number(page!) - 1) > 0;
 
   const hasNext =
-    POST_PER_PAGE * (page! - 1) + POST_PER_PAGE < posts?.totalData!;
+    POST_PER_PAGE * (Number(page!) - 1) + POST_PER_PAGE <
+    posts?.payload.totalData!;
 
   if (!posts) {
     return (

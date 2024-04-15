@@ -10,13 +10,12 @@ export default function Home({
 }: {
   searchParams: { page: string };
 }) {
-  const page = parseInt(searchParams.page) || 1;
   return (
     <main>
       <Featured />
       <CategoryList />
       <div className="flex gap-12">
-        <CardList page={page} />
+        <CardList page={searchParams.page ? searchParams.page : "1"} />
         <Leatest />
       </div>
     </main>

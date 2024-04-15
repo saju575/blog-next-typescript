@@ -20,10 +20,10 @@ interface CategoryI extends ResponseData {
 interface PostI extends ResponseData {
   payload: {
     posts: Post[];
+    totalPages: number;
+    currentPage?: number;
+    totalData: number;
   };
-  totalPages: number;
-  currentPage?: number;
-  totalData: number;
 }
 interface SinglePostI extends ResponseData {
   payload: Post;

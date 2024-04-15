@@ -1,19 +1,29 @@
-import axios from "../../../axios-request/axios-request";
+import { BASE_BACKEND_URL } from "../../../global-const";
 import LeatestCard from "./leatest-card";
 
-const getData = async (limit: number): Promise<Post[] | null> => {
-  const res = await axios.get(
-    `/posts?_sort=createdAt&_order=desc& _limit=${limit}`
+const getData = async (limit: number): Promise<PostI | null> => {
+  // const res = await axios.get(`/posts?_sort=desc& _limit=${limit}`);
+
+  // if ((await res).statusText !== "OK") {
+  //   return null;
+  // }
+  // return (await res).data;
+
+  const res = await fetch(
+    `${BASE_BACKEND_URL}/posts?_sort=desc& _limit=${limit}`,
+    {
+      cache: "no-store",
+    }
   );
 
-  if ((await res).statusText !== "OK") {
+  if (!res.ok) {
     return null;
   }
-  return (await res).data;
+  return await res.json();
 };
 
 const Leatest = async () => {
-  const posts: Post[] | null = await getData(7);
+  const posts = await getData(7);
 
   if (!posts) {
     <div className="flex-[2] hidden lg:block">
@@ -28,7 +38,7 @@ const Leatest = async () => {
     </div>;
   }
 
-  if (posts?.length === 0) {
+  if (posts?.payload.posts.length === 0) {
     <div className="flex-[2] hidden lg:block">
       <>
         <h3 className="text-gray text-sm">{"What's hot"}</h3>
@@ -50,7 +60,7 @@ const Leatest = async () => {
         </h3>
 
         <div className="mt-4 mb-10 flex flex-col gap-8">
-          {posts?.map((post, index) => (
+          {posts?.payload.posts.map((post, index) => (
             <LeatestCard key={index} post={post} />
           ))}
         </div>

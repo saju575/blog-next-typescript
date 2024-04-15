@@ -15,7 +15,7 @@ const ReactQuill = dynamic(
   },
   { ssr: false }
 );
-const getCategores = async (): Promise<CategoryI[] | null> => {
+const getCategores = async (): Promise<CategoryI | null> => {
   const res = await axios.get("/category");
   if (res.status !== 200) {
     return null;
@@ -23,7 +23,7 @@ const getCategores = async (): Promise<CategoryI[] | null> => {
   return res.data;
 };
 
-const submitPost = async (data: PostCreateData): Promise<Post> => {
+const submitPost = async (data: PostCreateData): Promise<SinglePostI> => {
   try {
     const res = await axios.post("/posts", data);
     return res.data;
@@ -36,11 +36,11 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required*"),
   img: Yup.string().required("Title Image URL is required*"),
   desc: Yup.string().required("Description is required*"),
-  category_id: Yup.number().required("Select a Category*"),
+  category_id: Yup.string().required("Select a Category*"),
 });
 
 const WritePage = () => {
-  const [category, setCategory] = useState<CategoryI[]>([]);
+  const [category, setCategory] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(AuthContext);
   const route = useRouter();
@@ -58,22 +58,20 @@ const WritePage = () => {
       try {
         setIsLoading(() => true);
         const selectedCategory = category.find(
-          (v) => v.id == values.category_id
+          (v) => v._id == values.category_id
         );
         const newData = {
           ...values,
           cat_slug: selectedCategory?.title!,
-          user_id: state.user?.id!,
+          user_id: state.user?._id!,
           user_email: state.user?.email!,
           user_name: state.user?.name!,
         };
 
         const result = await submitPost(newData);
 
-        if (result.id) {
-          console.log(result);
-
-          route.push(`/posts/${result.id}`);
+        if (result.payload._id) {
+          route.push(`/posts/${result.payload._id}`);
           setIsLoading(() => false);
         }
       } catch (error) {
@@ -87,7 +85,7 @@ const WritePage = () => {
       try {
         const data = await getCategores();
         if (data) {
-          setCategory(() => [...data]);
+          setCategory(() => [...data.payload]);
         }
       } catch (error) {}
     }
@@ -146,13 +144,13 @@ const WritePage = () => {
               onBlur={formik.handleBlur}
               value={formik.values.category_id}
               onChange={(e) =>
-                formik.setFieldValue("category_id", Number(e.target.value))
+                formik.setFieldValue("category_id", e.target.value)
               }
               name="category_id"
             >
               <option value={""}>Select Category</option>
               {category.map((v, index) => (
-                <option key={index} value={v.id}>
+                <option key={index} value={v._id}>
                   {v.title}
                 </option>
               ))}

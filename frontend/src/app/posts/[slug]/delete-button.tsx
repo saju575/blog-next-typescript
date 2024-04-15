@@ -10,8 +10,8 @@ const DeleteButton = ({
   postId,
   userId,
 }: {
-  postId: number | string;
-  userId: number | string;
+  postId: string;
+  userId: string;
 }) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { state } = useContext(AuthContext);
@@ -23,7 +23,7 @@ const DeleteButton = ({
       route.push("/");
     } catch (error) {}
   };
-  if (state.user?.id != userId) return null;
+  if (state.user?._id != userId) return null;
   return (
     <>
       <div className="mt-3">

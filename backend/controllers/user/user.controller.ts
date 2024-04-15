@@ -133,7 +133,16 @@ export const getProfileController = async (
     if (!token) {
       throw createHttpError(401, "User not authorized");
     }
-    const user: any = jwt.verify(token, JWT_ACTIVATION_KEY);
+    let user: any;
+    try {
+      user = jwt.verify(token, JWT_ACTIVATION_KEY);
+    } catch (error) {
+      throw createHttpError(401, "User not authorized");
+    }
+
+    if (!user) {
+      throw createHttpError(401, "User not authorized");
+    }
 
     // find user
 

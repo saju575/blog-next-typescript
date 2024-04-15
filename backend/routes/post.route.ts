@@ -4,6 +4,7 @@ import {
   deletePostController,
   getAllPostController,
   getSinglePostController,
+  updatePostController,
 } from "../controllers/post/post.controller";
 
 const postRouter = express.Router();
@@ -18,7 +19,7 @@ postRouter.get("/posts/:id", getSinglePostController);
 postRouter.post("/posts", createPostController);
 
 /* update post */
-postRouter.put("/posts/:id", createPostController);
+postRouter.put("/posts/:id", updatePostController);
 
 /* delete post */
 postRouter.delete("/posts/:id", deletePostController);

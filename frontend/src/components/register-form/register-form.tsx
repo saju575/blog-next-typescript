@@ -12,7 +12,7 @@ const submitRegisterData = async (values: {
   password: string;
   name: string;
   role: string;
-}): Promise<LoginData | null> => {
+}): Promise<LoginDataI | null> => {
   const res = await axios.post("/register", values);
   if (res.status !== 201) {
     return null;
@@ -45,12 +45,12 @@ const RegisterForm = () => {
       try {
         setLoginLoading(() => true);
         const loginData = await submitRegisterData({ ...values, role: "user" });
-        if (loginData) {
-          if (loginData.accessToken) {
-            localStorage.setItem("blog_token", loginData.accessToken);
+        if (loginData?.payload) {
+          if (loginData.payload.accessToken) {
+            localStorage.setItem("blog_token", loginData.payload.accessToken);
           }
           setCookie("blog_login", "login");
-          dispatch({ type: "LOGIN_SUCCESS", payload: loginData.user });
+          dispatch({ type: "LOGIN_SUCCESS", payload: loginData.payload.user });
           setLoginLoading(() => false);
           router.push("/");
         } else {

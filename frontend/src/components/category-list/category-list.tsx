@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BASE_BACKEND_URL } from "../../../global-const";
 
-const getData = async (): Promise<CategoryI[] | null> => {
+const getData = async (): Promise<CategoryI | null> => {
   const res = await fetch(`${BASE_BACKEND_URL}/category`, {
     cache: "no-store",
   });
@@ -27,7 +27,7 @@ const CategoryList = async () => {
     );
   }
 
-  if (data.length === 0) {
+  if (data.payload.length === 0) {
     // this should never happen, but just in case
 
     return (
@@ -47,7 +47,7 @@ const CategoryList = async () => {
       </h2>
 
       <div className="mb-10 flex flex-wrap gap-5 justify-evenly">
-        {data.map((item) => {
+        {data.payload.map((item) => {
           if (!item) {
             // this should never happen, but just in case
             console.error("category item is null");
@@ -56,7 +56,7 @@ const CategoryList = async () => {
 
           return (
             <Link
-              key={item.id}
+              key={item._id}
               href={`/blog?cat=${item.slug}`}
               className="flex items-center capitalize gap-3 justify-center w-36 h-16 rounded bg-slate-600 text-dark dark:text-light"
               style={{

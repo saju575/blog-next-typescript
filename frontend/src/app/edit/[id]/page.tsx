@@ -15,7 +15,7 @@ const ReactQuill = dynamic(
   { ssr: false }
 );
 
-const getCategores = async (): Promise<CategoryI[] | null> => {
+const getCategores = async (): Promise<CategoryI | null> => {
   const res = await axios.get("/category");
   if (res.status !== 200) {
     return null;
@@ -23,7 +23,7 @@ const getCategores = async (): Promise<CategoryI[] | null> => {
   return res.data;
 };
 
-const getPreviousPostData = async (id: string): Promise<Post | null> => {
+const getPreviousPostData = async (id: string): Promise<SinglePostI | null> => {
   const res = await axios.get(`/posts/${id}`);
 
   if (res.status !== 200) {
@@ -36,7 +36,7 @@ const getPreviousPostData = async (id: string): Promise<Post | null> => {
 const updatePost = async (
   id: string,
   values: PostCreateData
-): Promise<Post> => {
+): Promise<SinglePostI> => {
   try {
     const res = await axios.put(`/posts/${id}`, values);
 
@@ -50,11 +50,11 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required*"),
   img: Yup.string().required("Title Image URL is required*"),
   desc: Yup.string().required("Description is required*"),
-  category_id: Yup.number().required("Select a Category*"),
+  category_id: Yup.string().required("Select a Category*"),
 });
 const EditPost = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const [category, setCategory] = useState<CategoryI[]>([]);
+  const [category, setCategory] = useState<Category[]>([]);
   const [previousPostData, setPreviousPostData] = useState<Post>();
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(AuthContext);
@@ -65,7 +65,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
       title: previousPostData?.title!,
       img: previousPostData?.img!,
       desc: previousPostData?.desc!,
-      category_id: Number(previousPostData?.category_id.toString()!),
+      category_id: previousPostData?.category_id!,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -73,20 +73,20 @@ const EditPost = ({ params }: { params: { id: string } }) => {
       try {
         setIsLoading(() => true);
         const selectedCategory = category.find(
-          (v) => v.id == values.category_id
+          (v) => v._id == values.category_id
         );
         const newData = {
           ...values,
           cat_slug: selectedCategory?.title!,
-          user_id: state.user?.id!,
+          user_id: state.user?._id!,
           user_email: state.user?.email!,
           user_name: state.user?.name!,
         };
 
         const result = await updatePost(id, newData);
 
-        if (result.id) {
-          route.push(`/posts/${result.id}`);
+        if (result.payload._id) {
+          route.push(`/posts/${result.payload._id}`);
           setIsLoading(() => false);
         }
       } catch (error) {
@@ -100,7 +100,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
       try {
         const data = await getCategores();
         if (data) {
-          setCategory(() => [...data]);
+          setCategory(() => [...data.payload]);
         }
       } catch (error) {}
     }
@@ -112,7 +112,7 @@ const EditPost = ({ params }: { params: { id: string } }) => {
       try {
         const data = await getPreviousPostData(id);
         if (data) {
-          setPreviousPostData(() => data);
+          setPreviousPostData(() => data.payload);
         }
       } catch (error) {}
     }
@@ -171,13 +171,13 @@ const EditPost = ({ params }: { params: { id: string } }) => {
               onBlur={formik.handleBlur}
               value={formik.values.category_id}
               onChange={(e) =>
-                formik.setFieldValue("category_id", Number(e.target.value))
+                formik.setFieldValue("category_id", e.target.value)
               }
               name="category_id"
             >
               <option value={""}>Select Category</option>
               {category.map((v, index) => (
-                <option key={index} value={v.id}>
+                <option key={index} value={v._id}>
                   {v.title}
                 </option>
               ))}

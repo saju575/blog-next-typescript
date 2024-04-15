@@ -69,13 +69,14 @@ export const AuthContext = createContext<{
 });
 
 // fetch user profile
-const fetchUserProfile = async (): Promise<User | null> => {
-  const res = await axios.get("/profile");
+const fetchUserProfile = async (): Promise<UserI | null> => {
+  try {
+    const res = await axios.get("/profile");
 
-  if (res.status !== 200) {
+    return res.data;
+  } catch (error) {
     return null;
   }
-  return res.data;
 };
 
 const AuthContextProvider = ({
@@ -89,11 +90,14 @@ const AuthContextProvider = ({
     async function fetchData() {
       const storedToken = localStorage.getItem("blog_token");
       if (storedToken) {
-        const userProfileData: User | null = await fetchUserProfile();
+        const userProfileData: UserI | null = await fetchUserProfile();
 
-        if (userProfileData?.id) {
+        if (userProfileData?.payload.user._id) {
           setCookie("blog_login", "login");
-          dispatch({ type: "LOGIN_SUCCESS", payload: userProfileData });
+          dispatch({
+            type: "LOGIN_SUCCESS",
+            payload: userProfileData.payload.user,
+          });
         } else {
           deleteCookie("blog_login");
           dispatch({ type: "LOGOUT" });

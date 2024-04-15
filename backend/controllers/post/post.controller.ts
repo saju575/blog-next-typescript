@@ -67,18 +67,21 @@ export const getAllPostController = async (
 ) => {
   try {
     const {
-      _page = 1,
-      _limit = 10,
+      _page,
+      _limit,
       cat_slug,
       title,
       _sort = "asc",
     }: {
-      _page?: number;
-      _limit?: number;
+      _page?: string;
+      _limit?: string;
       cat_slug?: string;
       title?: string;
       _sort?: "asc" | "desc";
     } = req.query;
+
+    const page = Number(_page) || 1;
+    const limit = Number(_limit) || 10;
 
     let query: any = {};
 
@@ -90,27 +93,27 @@ export const getAllPostController = async (
       query.title = { $regex: title, $options: "i" }; // Case-insensitive search
     }
 
-    let sortOptions: any;
+    let sortOptions: any = {};
 
     // Check if sort direction is provided
     if (
       _sort &&
       (_sort.toLowerCase() === "asc" || _sort.toLowerCase() === "desc")
     ) {
-      sortOptions.updatedAt = _sort === "asc" ? "1" : "-1"; // 1 for ascending, -1 for descending
+      sortOptions.createdAt = _sort === "asc" ? 1 : -1; // 1 for ascending, -1 for descending
     } else {
       // Default sorting direction (descending)
-      sortOptions.updatedAt = "-1";
+      sortOptions.createdAt = 1;
     }
 
     const postsCount = await Post.countDocuments(query);
-    const totalPages = Math.ceil(postsCount / _limit);
-    const skip = (_page - 1) * _limit;
+    const totalPages = Math.ceil(postsCount / limit);
+    const skip = (page - 1) * limit;
 
     const posts = await Post.find(query)
       .sort(sortOptions)
       .skip(skip)
-      .limit(_limit)
+      .limit(limit)
       .exec();
 
     return successResponse(res, {
@@ -118,7 +121,8 @@ export const getAllPostController = async (
       payload: {
         posts,
         totalPages,
-        currentPage: _page,
+        currentPage: page,
+        totalData: postsCount,
       },
       statusCode: 200,
     });

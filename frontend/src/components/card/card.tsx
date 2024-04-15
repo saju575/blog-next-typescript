@@ -20,7 +20,7 @@ const Card = ({ item }: { item: Post }) => {
             {item?.cat_slug}
           </span>
         </div>
-        <Link href={`/posts/${item.id}`} className="">
+        <Link href={`/posts/${item._id}`} className="">
           <h1 className="text-2xl font-semibold text-dark dark:text-light">
             {item?.title}
           </h1>
@@ -36,7 +36,7 @@ const Card = ({ item }: { item: Post }) => {
         />
 
         <Link
-          href={`/posts/${item.id}`}
+          href={`/posts/${item._id}`}
           className="capitalize w-max border-b border-red dark:text-light py-[2px]"
         >
           Read more

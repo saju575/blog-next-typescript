@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const LeatestCard = ({ post }: { post: Post }) => {
   return (
-    <Link href={`/posts/${post?.id}`} className="flex items-center gap-5">
+    <Link href={`/posts/${post?._id}`} className="flex items-center gap-5">
       <div className={` flex flex-col gap-1`}>
         <span
           className="capitalize w-max py-[2px] px-2 rounded-[10px] text-xs text-light"

@@ -10,7 +10,7 @@ import axios from "../../../axios-request/axios-request";
 const submitLoginData = async (values: {
   email: string;
   password: string;
-}): Promise<LoginData | null> => {
+}): Promise<LoginDataI | null> => {
   const res = await axios.post("/login", values);
   if (res.status !== 200) {
     return null;
@@ -40,12 +40,12 @@ const LoginForm = () => {
       try {
         setLoginLoading(() => true);
         const loginData = await submitLoginData(values);
-        if (loginData) {
-          if (loginData.accessToken) {
-            localStorage.setItem("blog_token", loginData.accessToken);
+        if (loginData?.payload) {
+          if (loginData.payload.accessToken) {
+            localStorage.setItem("blog_token", loginData.payload.accessToken);
           }
           setCookie("blog_login", "login");
-          dispatch({ type: "LOGIN_SUCCESS", payload: loginData.user });
+          dispatch({ type: "LOGIN_SUCCESS", payload: loginData.payload.user });
           setLoginLoading(() => false);
           router.push("/");
         } else {
